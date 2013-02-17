@@ -11,6 +11,8 @@ class Setting
     public static $count    = 300; // 最新何件のデータを残すか
     public static $sinceId  = 234864117591203840; // ここまでのtweetはとりこみたい（このtweetは入らない）
 
+    public static $limit = 10; // 1ページ当たり何枚の写真を載せるか
+
     public static $oauth = array( // OAuthの設定
         'consumer_key'        => '',
         'consumer_secret'     => '',
