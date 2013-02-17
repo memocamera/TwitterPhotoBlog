@@ -1,13 +1,13 @@
 <?php
 /**
- * TweetPhotologのロジッククラス
+ * TweetPhotoBLogのロジッククラス
  */
 require_once 'Lite.php';
-require_once 'TweetPhotologJsonGetter.php';
-require_once 'TweetPhotologFilter.php';
-require_once 'TweetPhotologConverter.php';
+require_once 'TweetPhotoBLogJsonGetter.php';
+require_once 'TweetPhotoBLogFilter.php';
+require_once 'TweetPhotoBLogConverter.php';
 
-class TweetPhotolog {
+class TweetPhotoBLog {
     const CACHE_ID_OF_TWEETS  = 'twitter';
     const CACHE_ID_OF_LIFETIME  = 'lifetime';
     const LIFE_TIME = 300;
@@ -106,15 +106,15 @@ class TweetPhotolog {
      */
     protected function _getConvertedFilteredTweets()
     {
-        $getter = new TweetPhotologJsonGetter($this->_username, $this->_oauth);
+        $getter = new TweetPhotoBLogJsonGetter($this->_username, $this->_oauth);
         $tweets = $getter->get($this->_sinceId);
-        $filter = new TweetPhotologFilter($this->_hashtag);
+        $filter = new TweetPhotoBLogFilter($this->_hashtag);
         $filteredTweets = $filter->filter($tweets);
         if (empty($filteredTweets)) {
             return array();
         }
 
-        $converter = new TweetPhotologConverter($this->_hashtag);
+        $converter = new TweetPhotoBLogConverter($this->_hashtag);
 
         return $converter->convert($filteredTweets);
     }

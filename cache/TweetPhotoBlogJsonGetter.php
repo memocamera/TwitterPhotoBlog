@@ -1,7 +1,7 @@
 <?php
 require_once("twitteroauth.php");
 
-class TweetPhotologJsonGetter
+class TweetPhotoBLogJsonGetter
 {
     const TWITTER_BASE_1_0 = 'http://api.twitter.com/1/';
     const TWITTER_API = 'statuses/user_timeline';
