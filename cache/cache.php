@@ -1,8 +1,8 @@
 <?php
-require_once 'TweetPhotolog.php';
+require_once 'TweetPhotoBLog.php';
 require_once 'Setting.php';
 
-$model = new TweetPhotolog(getSetting());
+$model = new TweetPhotoBLog(getSetting());
 if (!$model->hasFreshTweets()) {
     $isCached = $model->cacheTweets();
 }
