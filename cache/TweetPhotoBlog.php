@@ -67,11 +67,15 @@ class TweetPhotoBLog {
     /**
      * @return string json string of tweets
      */
-    public function getJsonizedTweets()
+    public function getJsonizedTweets($offset = 0, $length = null)
     {
         $tweets = $this->_cache->get(self::CACHE_ID_OF_TWEETS);
         if (empty($tweets)) {
             $tweets = '[]';
+        }
+
+        if ($length) {
+            $tweets = json_encode(array_slice(json_decode($tweets, true), $offset, $length));
         }
 
         return $tweets;
@@ -92,6 +96,7 @@ class TweetPhotoBLog {
             $this->_adjoinTweets($convertedFilteredTweets);
         }
 
+        $isSaved = false;
         if (!empty($this->_tweets)) { // リクエストがあるたびにcacheは更新する
             $isSaved = $this->_cache->save(json_encode($this->_tweets), self::CACHE_ID_OF_TWEETS);
             $this->_cache->save(time(), self::CACHE_ID_OF_LIFETIME);
