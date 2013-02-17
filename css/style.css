@@ -1,0 +1,218 @@
+@charset "utf-8";
+
+/* Init */
+html {
+	margin: 0;
+	padding: 0;
+}
+body {
+	margin: 0;
+	padding: 0;
+}
+* {
+	margin: 0;
+	padding: 0;
+	outline: none; 
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, input, textarea, a, p, blockquote, th, td { 
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+img {
+	display: block;
+	border: 0;
+}
+address, caption, cite, code, dfn, em, strong, th, var {
+	font-style: normal;
+    font-weight: normal;
+}
+ol, ul {
+    list-style: none;
+}   
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+    font-weight: normal;
+}
+
+/* HTML5 */
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary, mark {  
+  display:block;
+}
+
+/* Font */
+body {
+	font-size: 12px;
+	line-height: 18px;
+	font-family: Futura-Medium, 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, sans-serif;
+	font-style: normal;
+	font-weight: normal !important;
+	color: #333;
+	background: #f1efee;
+}
+a {
+	display: block;
+}
+
+
+/* Contents */
+#container {
+	margin: 30px;
+}
+a,
+a:visited,
+a:active {
+	-webkit-transition: all 0.1s ease;
+	-moz-transition: all 0.1s ease;
+}
+.item {
+  width: 260px;
+  margin: 10px;
+  float: left;
+}
+header {
+	width: 260px;
+	height: 260px;
+	background: #FFF;
+	text-align: center;
+}
+article {
+	display: none;
+	background: #FFF;
+}
+h1 a {
+	display: block;
+	width: 260px;
+	height: 220px;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	background: url('../images/title.gif') no-repeat left top;
+}
+h1 a:hover {
+	float: left;
+}
+.user,
+.load img {
+	float: left;
+	margin-left: 20px;
+}
+.user a,
+.howto a {
+	display: block;
+	color: #000;
+	text-decoration: none;
+}
+.user a:hover,
+.howto a:hover {
+	color: #BBB;
+}
+.user img {
+	display: inline;
+	margin-right: 10px;
+	vertical-align: middle;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+}
+.howto {
+	float: right;
+	margin-right: 20px;
+	line-height: 24px;
+}
+.photo,
+article p,
+article ul {
+	margin: 10px;
+	-webkit-transition: all 0.1s ease;
+	-moz-transition: all 0.1s ease;
+}
+img.photo {
+	max-width: 240px;
+}
+.item > a {
+	position: relative;
+	text-decoration: none;
+	height: 100%;
+}
+a:hover .photo {
+	box-shadow: 0 0 0 4px rgba(0,0,0,1);
+}
+.comment {
+	display: none;
+	position: absolute;
+	width: 240px;
+	height: 40px;
+	bottom: 0;
+	padding-top: 4px;
+	background: #000;
+	color: #FFF;
+	text-align: center;
+	line-height: 40px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.comment span {
+	padding: 0 10px;
+}
+.photoData {
+	margin: 30px 10px;
+	text-align: center;
+	line-height: 30px;
+}
+.camera {
+	color: #BBB;
+}
+.twitterData {
+	float: right
+}
+.twitterData a,
+.twitterData a:visited,
+.twitterData a:active {
+	color: #BBB;
+	text-decoration: none;
+}
+.twitterData li {
+	float: left;
+}
+.reply a,
+.retweet a,
+.favorite a {
+	display: block;
+	width: 24px;
+	height: 24px;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	opacity: 0.4;
+}
+.reply a {
+	background: url('../images/icon-reply.gif') no-repeat left top;
+}
+.retweet a {
+	background: url('../images/icon-retweet.gif') no-repeat left top;
+}
+.favorite a {
+	background: url('../images/icon-favorite.gif') no-repeat left top;
+}
+.reply a:hover,
+.retweet a:hover,
+.favorite a:hover {
+	opacity: 1;
+}
+footer {
+	display: none;
+	width: 260px;
+	font-size: 14px;
+	text-align: center;
+}
+footer a,
+footer a:visited,
+footer a:active {
+	color: #000;
+	text-decoration: none;
+}
+footer a:hover {
+	color: #BBB;
+}
