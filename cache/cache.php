@@ -1,5 +1,5 @@
 <?php
-require_once 'TweetPhotoBLog.php';
+require_once 'TweetPhotoBlog.php';
 require_once 'Setting.php';
 
 $setting = getSetting();
