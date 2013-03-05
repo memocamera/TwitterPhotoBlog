@@ -3,11 +3,26 @@ require 'TweetPhotologJsonGetter.php';
 
 class TweetPhotologJsonGetterTest extends PHPUnit_Framework_TestCase
 {
+    protected $_oauthSetting;
+
+    public function setUp()
+    {
+        include_once dirname(__FILE__) . '/../cache/Setting.php';
+
+        foreach (Setting::$oauth as $k => $v) {
+            if (empty($v)) {
+                $this->fail('OAuth setting error');
+            }
+        }
+
+        $this->_oauthSetting = Setting::$oauth;
+    }
+
     public function test_あるユーザの最新のtweetsを取得してくる()
     {
         $username = 'memocamera';
 
-        $getter = new TweetPhotologJsonGetter($username);
+        $getter = new TweetPhotologJsonGetter($username, $this->_oauthSetting);
         $tweets = $getter->get();
 
         $this->assertSame(200, count($tweets), '件数が正しいか');
@@ -20,7 +35,7 @@ class TweetPhotologJsonGetterTest extends PHPUnit_Framework_TestCase
         $sinceId = '276842829144260609';  // 入らない
         $maxId = '277637784909533185';    // 入る
 
-        $getter = new TweetPhotologJsonGetter($username);
+        $getter = new TweetPhotologJsonGetter($username, $this->_oauthSetting);
         $tweets = $getter->get($sinceId, $maxId);
 
         $this->assertSame(4, count($tweets), '指定したtweetsが取得できているか');
@@ -31,7 +46,7 @@ class TweetPhotologJsonGetterTest extends PHPUnit_Framework_TestCase
         $username = 'memocamera';
         $sinceId = '235551214954237952';  // 入らない
 
-        $getter = new TweetPhotologJsonGetter($username);
+        $getter = new TweetPhotologJsonGetter($username, $this->_oauthSetting);
         $defaultTweets = $getter->get();
         $tweets = $getter->get($sinceId);
 
@@ -56,26 +71,6 @@ class TweetPhotologJsonGetterTest extends PHPUnit_Framework_TestCase
         }
         foreach ($countOfIdStr as $idStr => $count) {
             $this->assertSame(1, $count, 'id_strの重複はないか');
-        }
-    }
-
-    public function test_1_0と1_1で同じJSONが取得できる()
-    {
-        $setting = parse_ini_file(dirname(__FILE__) . '/../setting.ini', true);
-        if (empty($setting['oauth'])) {
-            $this->fail('skip 1.1 API test');
-        }
-
-        $username = 'memocamera';
-
-        $getter1_0 = new TweetPhotologJsonGetter($username);
-        $getter1_1 = new TweetPhotologJsonGetter($username, $setting['oauth']);
-        $tweets1_0 = $getter1_0->get();
-        $tweets1_1 = $getter1_1->get();
-
-        $this->assertSame(count($tweets1_0), count($tweets1_1), '2つのtweet数が等しいか');
-        foreach ($tweets1_0 as $i => $tweet) {
-            $this->assertSame($tweet['id_str'], $tweets1_1[$i]['id_str'], '2つのtweetが等しいか');
         }
     }
 }

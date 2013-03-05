@@ -3,30 +3,25 @@ require_once("twitteroauth.php");
 
 class TweetPhotologJsonGetter
 {
-    const TWITTER_BASE_1_0 = 'http://api.twitter.com/1/';
-    const TWITTER_API = 'statuses/user_timeline';
+    const TWITTER_BASE_1_1 = 'https://api.twitter.com/1.1/';
+    const TWITTER_API = 'statuses/user_timeline.json';
     const TWEET_COUNT = 200;
     const MAX_REQUEST_COUNT = 16;
 
     protected $_username;
-    protected $_twitterApiVersion;
     protected $_twitteroauth;
 
-    public function __construct($username, $oauth = null)
+    public function __construct($username, $oauth)
     {
         $this->_username = $username;
-        if (is_null($oauth) || empty($oauth)) {
-            $this->_twitterApiVersion = '1_0';
-        } else {
-            $this->_twitterApiVersion = '1_1';
-            $this->_twitteroauth = new TwitterOAuth(
-                $oauth['consumer_key'],
-                $oauth['consumer_secret'],
-                $oauth['access_token'],
-                $oauth['access_token_secret']
-            );
-            $this->_twitteroauth->decode_json = false;
-        }
+
+        $this->_twitteroauth = new TwitterOAuth(
+            $oauth['consumer_key'],
+            $oauth['consumer_secret'],
+            $oauth['access_token'],
+            $oauth['access_token_secret']
+        );
+        $this->_twitteroauth->decode_json = false;
     }
 
     /**
@@ -49,8 +44,7 @@ class TweetPhotologJsonGetter
             $query['max_id'] = $maxId;
         }
 
-        $method = '_get_by_' . $this->_twitterApiVersion;
-        $json = $this->$method($query);
+        $json = $this->_get($query);
         $tweets = json_decode($json, true);
         if (!$tweets || empty($tweets)) {
             return array();
@@ -87,16 +81,12 @@ class TweetPhotologJsonGetter
         return array_merge($tweets, $oldTweets);
     }
 
-    protected function _get_by_1_0($query)
+    protected function _get($query)
     {
-        return file_get_contents(sprintf(
-            '%s%s.json?%s',
-            self::TWITTER_BASE_1_0, self::TWITTER_API, http_build_query($query)
-        ));
-    }
-
-    protected function _get_by_1_1($query)
-    {
-        return $this->_twitteroauth->get(self::TWITTER_API, $query);
+        return $this->_twitteroauth->oAuthRequest(
+            self::TWITTER_BASE_1_1 . self::TWITTER_API,
+            'GET',
+            $query
+        );
     }
 }
