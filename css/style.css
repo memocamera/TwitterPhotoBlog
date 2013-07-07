@@ -63,8 +63,8 @@ a {
 a,
 a:visited,
 a:active {
-	-webkit-transition: all 0.1s ease;
-	-moz-transition: all 0.1s ease;
+	-webkit-transition: all 0.2s ease;
+	-moz-transition: all 0.2s ease;
 }
 .item {
   width: 260px;
@@ -200,6 +200,22 @@ a:hover .photo {
 .retweet a:hover,
 .favorite a:hover {
 	opacity: 1;
+}
+#more {
+	display: block;
+	text-align: center;
+}
+#more p {
+	margin: 0;
+}
+#more a {
+	padding: 20px;
+	color: #000;
+	text-decoration: none;
+}
+#more a:hover {
+	color: #FFF;
+	background: #000;
 }
 footer {
 	display: none;
