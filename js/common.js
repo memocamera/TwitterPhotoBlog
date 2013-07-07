@@ -35,7 +35,7 @@ TweetPhotoBLog.getCache = function(page, selector) {
 			});
 
 			if (!TweetPhotoBLog._isLoadedAllTweets(json)) {
-				article += '<span data-next-page="' + (page + 1) + '" class="item more" style="cursor:pointer;display:none">もっと表示</span>';
+				article += '<article class="item" id="more" data-next-page="' + (page + 1) + '"><p><a>+ View More</a></p></article>';
 			}
 			$(selector).after(article);
 			
@@ -93,21 +93,21 @@ TweetPhotoBLog._layoutElements = function() {
 			$('article.page' + TweetPhotoBLog.currentPage).hide().each(function (i) {
 				$(this).delay(i * 30).fadeIn(500);
 			});
-			$('.more').hide().fadeIn(1000);
+			$('#more').hide().fadeIn(1000);
 			$('footer').hide().fadeIn(1000);
 		});
 	} else {
 		$newImages = $('.item.page' + TweetPhotoBLog.currentPage);
 		$newImages.imagesLoaded(function(){
-			$('.more').after(TweetPhotoBLog.$footer);
+			$('#more').after(TweetPhotoBLog.$footer);
 
-			$container.masonry('appended', $newImages.add('.more').add(TweetPhotoBLog.$footer), true);
+			$container.masonry('appended', $newImages.add('#more').add(TweetPhotoBLog.$footer), true);
 
 			//Fadein
 			$newImages.hide().each(function (i) {
 				$(this).delay(i * 30).fadeIn(500);
 			});
-			$('.more').hide().fadeIn(1000);
+			$('#more').hide().fadeIn(1000);
 			$('footer').hide().fadeIn(1000);
 		});
 	}
@@ -125,7 +125,7 @@ TweetPhotoBLog._showComment = function() {
 };
 
 $(function(){
-	$(document).on('mousedown', '.more', function() {
+	$(document).on('mousedown', '#more', function() {
 		var $this = $(this),
 			nextPage = $this.data('next-page');
 

@@ -204,6 +204,7 @@ a:hover .photo {
 #more {
 	display: block;
 	text-align: center;
+	cursor: pointer;
 }
 #more p {
 	margin: 0;
