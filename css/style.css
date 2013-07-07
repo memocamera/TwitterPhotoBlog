@@ -202,7 +202,7 @@ a:hover .photo {
 	opacity: 1;
 }
 #more {
-	display: block;
+	display: hidden;
 	text-align: center;
 	cursor: pointer;
 }
