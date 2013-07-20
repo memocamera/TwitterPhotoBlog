@@ -3,7 +3,7 @@ require_once 'TweetPhotoBlog.php';
 require_once 'Setting.php';
 
 $setting = getSetting();
-$model = new TweetPhotoBLog($setting);
+$model = new TweetPhotoBlog($setting);
 
 $page = getPage();
 $limit = $setting['limit'];

@@ -4,11 +4,11 @@
  * tweetからhashtagと、その前の括弧にあるカメラ名を取り出して新しいtextにする
  *
  *       $hashtag = '曇時々やゝ光';
- *       $conveter = new TweetPhotoBLogConverter($hashtag);
+ *       $conveter = new TweetPhotoBlogConverter($hashtag);
  *       $res = $converter->convert($tweets);
  *
  */
-class TweetPhotoBLogConverter
+class TweetPhotoBlogConverter
 {
     protected $_hashtag;
 
